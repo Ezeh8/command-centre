@@ -1,0 +1,295 @@
+<!doctype html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Command Centre — Sample Output</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
+
+:root {
+  --bg: #F7F6F3;
+  --surface: #FFFFFF;
+  --surface-alt: #EFEEE9;
+  --text: #1E1E20;
+  --text-secondary: #5A5A5E;
+  --text-muted: #8A8A8E;
+  --accent: #C66D12;
+  --accent-light: #FEF3E6;
+  --success: #1A7A42;
+  --success-light: #E6F5ED;
+  --warning: #B5760A;
+  --warning-light: #FFF6E5;
+  --critical: #C03030;
+  --critical-light: #FDECEC;
+  --info: #2668B0;
+  --info-light: #E8F0FA;
+  --border: #E0DFD9;
+  --border-strong: #C8C7C1;
+  --shadow: 0 1px 3px rgba(30,30,32,0.06);
+  --radius: 8px;
+  --radius-sm: 5px;
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141416; --surface: #1E1E22; --surface-alt: #27272B;
+    --text: #E6E6E8; --text-secondary: #A8A8AC; --text-muted: #6E6E72;
+    --accent: #E8892A; --accent-light: #2A2010;
+    --success: #38B86A; --success-light: #0E2618;
+    --warning: #D4940E; --warning-light: #2A2010;
+    --critical: #E05050; --critical-light: #2A1414;
+    --info: #4A90D9; --info-light: #141E2A;
+    --border: #2E2E32; --border-strong: #404044;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+}
+* { box-sizing: border-box; margin: 0; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.55; padding-inline: 16px; padding-block: 0 24px; }
+.header { position: sticky; top: 0; background: var(--bg); z-index: 100; padding-block: 16px 0; border-bottom: 1px solid var(--border); }
+.header-top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.header h1 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+.refresh-badge { font-size: 0.78rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.sample-note { font-size: 0.76rem; color: var(--warning); background: var(--warning-light); border: 1px solid var(--warning); border-radius: var(--radius-sm); padding: 8px 12px; margin-bottom: 12px; }
+.tabs { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { padding: 10px 18px; font-size: 0.82rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: var(--font-body); }
+.tab:hover { color: var(--text-secondary); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.tab-count { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; font-size: 0.7rem; font-weight: 600; margin-left: 6px; background: var(--accent-light); color: var(--accent); }
+.section { display: none; padding-block: 20px; }
+.section.active { display: block; }
+.section-intro { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px; }
+
+.content-card { padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; box-shadow: var(--shadow); }
+.content-rank { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 0.72rem; font-weight: 700; background: var(--accent); color: #fff; margin-bottom: 8px; }
+.content-headline { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 6px; line-height: 1.35; }
+.content-news { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.45; }
+.content-angles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 600px) { .content-angles { grid-template-columns: 1fr; } }
+.angle-box { padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.78rem; line-height: 1.4; }
+.angle-tiktok { background: var(--critical-light); border-left: 3px solid var(--critical); }
+.angle-linkedin { background: var(--info-light); border-left: 3px solid var(--info); }
+.angle-label { font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.angle-tiktok .angle-label { color: var(--critical); }
+.angle-linkedin .angle-label { color: var(--info); }
+.relevance-badge { display: inline-block; margin-left: 8px; font-size: 0.68rem; font-weight: 600; padding: 1px 7px; border-radius: 8px; background: var(--success-light); color: var(--success); vertical-align: middle; }
+
+.intel-group { margin-bottom: 20px; }
+.intel-group h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.intel-item { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.intel-item:last-child { border-bottom: none; }
+.intel-amount { font-weight: 700; font-size: 0.88rem; font-variant-numeric: tabular-nums; color: var(--accent); white-space: nowrap; min-width: 70px; }
+.intel-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; }
+.intel-desc strong { color: var(--text); font-weight: 600; }
+.intel-tag { font-size: 0.68rem; font-weight: 600; padding: 2px 7px; border-radius: 3px; white-space: nowrap; align-self: center; }
+.intel-tag.series-b { background: var(--success-light); color: var(--success); }
+.intel-tag.series-c { background: var(--info-light); color: var(--info); }
+.intel-tag.series-a { background: var(--warning-light); color: var(--warning); }
+.intel-tag.acquisition { background: var(--critical-light); color: var(--critical); }
+.intel-tag.launch { background: var(--accent-light); color: var(--accent); }
+.intel-tag.policy { background: var(--info-light); color: var(--info); }
+
+.pipeline-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; }
+.pipeline-table-wrap { overflow-x: auto; }
+.pipeline-table th { text-align: left; padding: 8px 12px; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); background: var(--surface-alt); border-bottom: 1px solid var(--border); white-space: nowrap; }
+.pipeline-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.pipeline-table th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+.pipeline-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-secondary); }
+.pipeline-table tr:last-child td { border-bottom: none; }
+.pipeline-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+.pipeline-table tr:hover td { background: var(--surface-alt); }
+.status-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+.status-active { background: var(--success-light); color: var(--success); }
+.status-waiting { background: var(--warning-light); color: var(--warning); }
+.status-complete { background: var(--info-light); color: var(--info); }
+.status-stale { background: var(--surface-alt); color: var(--text-muted); }
+.priority-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+.priority-high { background: var(--critical); }
+.priority-medium { background: var(--warning); }
+.priority-low { background: var(--text-muted); }
+.action-banner { padding: 14px 16px; background: var(--warning-light); border: 1px solid var(--warning); border-radius: var(--radius); margin-bottom: 18px; font-size: 0.82rem; }
+.action-banner strong { color: var(--warning); }
+.action-banner ol { margin: 8px 0 0 18px; padding: 0; }
+.action-banner li { margin-bottom: 4px; }
+@media (max-width: 600px) { .intel-item { grid-template-columns: 1fr; } .intel-amount { min-width: 0; } .intel-tag { justify-self: start; } .header h1 { font-size: 1.35rem; } }
+</style></head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <h1>Command Centre</h1>
+    <span class="refresh-badge">Sample run — Sep 19, 2026</span>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="content">AI News <span class="tab-count">5</span></button>
+    <button class="tab" data-tab="intel">Market Intel <span class="tab-count">14</span></button>
+    <button class="tab" data-tab="pipeline">Pipeline <span class="tab-count">7</span></button>
+  </div>
+</div>
+
+<div class="sample-note">This is a sanitized public sample. Content Ideas and Market Intel are genuine output from a real daily run (built from public news). Pipeline uses illustrative placeholder projects — the live version tracks real, private work.</div>
+
+<!-- CONTENT IDEAS -->
+<div class="section active" id="content">
+  <p class="section-intro">Content angles generated from the day's top AI/tech news, scored against a fixed set of interest areas (AI enablement, agentic engineering, AI-in-education, SaaS disruption). Unedited real output.</p>
+
+  <div class="content-card">
+    <span class="content-rank">1</span>
+    <div class="content-headline">Claude now does 26% of the work building the next Claude <span class="relevance-badge">5/5</span></div>
+    <div class="content-news">Anthropic's R&amp;D automation index (Sep 17) shows Claude now performs 26% of the company's own AI research and engineering work, up from under 1% in February. Roughly 30,000 concurrent agents run tasks; monitors block about 1 in 47,000 actions; no fully autonomous operation was measured in any part of the process.</div>
+    <div class="content-angles">
+      <div class="angle-box angle-tiktok">
+        <div class="angle-label">TikTok</div>
+        "Anthropic just admitted Claude builds 26% of the next Claude — up from basically 0% in February." Count-up animation 1%→26%, land on the 1-in-47,000 safety-block stat as the real headline.
+      </div>
+      <div class="angle-box angle-linkedin">
+        <div class="angle-label">LinkedIn</div>
+        The first hard, measured self-improvement velocity number from a frontier lab — argue this is the KPI agentic-engineering teams should start tracking internally.
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <span class="content-rank">2</span>
+    <div class="content-headline">Researchers used Claude to hack OpenAI employee accounts in under 72 hours <span class="relevance-badge">5/5</span></div>
+    <div class="content-news">A three-person security startup chained two bugs in OpenAI's Discourse forum software; Claude Opus 5 produced a working exploit within hours of release. Employee ChatGPT accounts and OpenAI's GitHub org were exposed before a $6,500 bounty was paid.</div>
+    <div class="content-angles">
+      <div class="angle-box angle-tiktok">
+        <div class="angle-label">TikTok</div>
+        "Security researchers just hacked OpenAI... using Anthropic's Claude." Walk the exploit chain like a heist, close on the "$200/month" line.
+      </div>
+      <div class="angle-box angle-linkedin">
+        <div class="angle-label">LinkedIn</div>
+        The security-expertise floor just dropped to a monthly subscription — a warning for any company treating agent access as low-risk convenience.
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <span class="content-rank">3</span>
+    <div class="content-headline">Zuckerberg, Musk, and Huang just killed the AI industry's own oversight body <span class="relevance-badge">4/5</span></div>
+    <div class="content-news">Three frontier labs had spent weeks building a FINRA-style self-regulatory body for pre-release model testing. Meta, xAI, and Nvidia's CEOs lobbied to reject it, and the shared industry rulebook collapsed.</div>
+    <div class="content-angles">
+      <div class="angle-box angle-tiktok">
+        <div class="angle-label">TikTok</div>
+        "The AI industry tried to police itself. Three CEOs killed it in one week." Quick explainer on why self-regulation just failed before it started.
+      </div>
+      <div class="angle-box angle-linkedin">
+        <div class="angle-label">LinkedIn</div>
+        A live case study in the tension between competitive AI labs and coordinated safety governance.
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <span class="content-rank">4</span>
+    <div class="content-headline">Google is testing a Gemini agent that runs your whole household <span class="relevance-badge">4/5</span></div>
+    <div class="content-news">Google began testing a Gemini-powered agent coordinating up to 6 family members — schedules, email routing, task tracking, form prefilling, daily briefings — on isolated agent infrastructure. Waitlist-gated.</div>
+    <div class="content-angles">
+      <div class="angle-box angle-tiktok">
+        <div class="angle-label">TikTok</div>
+        "Google just built a Gemini agent that's basically a family COO." Demo the daily-briefing/form-prefill flow as the hook.
+      </div>
+      <div class="angle-box angle-linkedin">
+        <div class="angle-label">LinkedIn</div>
+        Consumer AI agents are quietly absorbing the coordination work SaaS calendar/task tools used to own.
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <span class="content-rank">5</span>
+    <div class="content-headline">A major pharma company just put Claude inside its drug discovery pipeline <span class="relevance-badge">4/5</span></div>
+    <div class="content-news">A large pharmaceutical company announced Claude deployment across drug discovery and R&amp;D workflows. Anthropic is separately building a physical biology lab, exploring robotic lab equipment, with partnerships across major pharma names.</div>
+    <div class="content-angles">
+      <div class="angle-box angle-tiktok">
+        <div class="angle-label">TikTok</div>
+        "Anthropic isn't just making a chatbot for pharma — it's building a physical lab." Quick visual on the AI-lab-in-Silicon-Valley angle.
+      </div>
+      <div class="angle-box angle-linkedin">
+        <div class="angle-label">LinkedIn</div>
+        AI enablement inside a heavily regulated, high-stakes industry is the sharpest test case yet for "AI as infrastructure, not tooling."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARKET INTEL -->
+<div class="section" id="intel">
+  <p class="section-intro">AI funding rounds, acquisitions, product launches, governance/security developments, and regional policy from the past 24-48 hours. Unedited real output.</p>
+
+  <div class="intel-group">
+    <h3>Funding Rounds</h3>
+    <div class="intel-item"><span class="intel-amount">$3.9B</span><span class="intel-desc"><strong>Crusoe</strong> — AI infrastructure/data centers. Valuation tripled to $30.9B since October 2025.</span><span class="intel-tag series-c">Late-stage</span></div>
+    <div class="intel-item"><span class="intel-amount">$700M</span><span class="intel-desc"><strong>Emulate</strong> — DeepMind spinout, AI for biology/drug discovery. $3.7B valuation.</span><span class="intel-tag series-b">Growth</span></div>
+    <div class="intel-item"><span class="intel-amount">$550M</span><span class="intel-desc"><strong>Temporal Technologies</strong> — durable workflow/agent-orchestration infrastructure. Series E.</span><span class="intel-tag series-c">Series E</span></div>
+    <div class="intel-item"><span class="intel-amount">$20M+</span><span class="intel-desc"><strong>ManticAI</strong> — AI forecasting startup, outperformed human forecasters in a major forecasting competition. ~$90M valuation.</span><span class="intel-tag series-a">Early-stage</span></div>
+  </div>
+
+  <div class="intel-group">
+    <h3>Acquisitions &amp; Partnerships</h3>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Novo Nordisk + Anthropic</strong> — Claude embedded across drug discovery and R&amp;D workflows.</span><span class="intel-tag acquisition">Partnership</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Anthropic biology lab</strong> — physical lab in the SF Bay Area, robotic lab equipment; partnerships include Genentech and Bristol Myers Squibb.</span><span class="intel-tag launch">Infrastructure</span></div>
+  </div>
+
+  <div class="intel-group">
+    <h3>Product Launches</h3>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Google "CC"</strong> — Gemini-powered family-coordination agent; waitlist, adults-only.</span><span class="intel-tag launch">Launch</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>OpenAI Astra for Law</strong> — legal-specialized model configuration for research and document drafting.</span><span class="intel-tag launch">Launch</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Z.ai GLM-5.3-Flash</strong> — 320B-parameter model deployed on 100,000+ accelerators; throughput tripled in under two weeks.</span><span class="intel-tag launch">Launch</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>AutoArk Edge0</strong> — runs 35B-parameter models from SSD on a consumer laptop at 20.4 tokens/sec.</span><span class="intel-tag launch">Launch</span></div>
+  </div>
+
+  <div class="intel-group">
+    <h3>Governance &amp; Security</h3>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>AI standards body collapses</strong> — three frontier-lab CEOs lobbied against a proposed FINRA-style pre-release testing body.</span><span class="intel-tag policy">Governance</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Security researchers breach OpenAI via Claude</strong> — chained forum bugs, cracked with a frontier model within hours; employee accounts and GitHub org access exposed.</span><span class="intel-tag acquisition">Security</span></div>
+  </div>
+
+  <div class="intel-group">
+    <h3>Regional AI Policy</h3>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>National AI transformation roadmap</strong> — a national IT regulator proposes agentic AI for inter-departmental government coordination; existing data-protection law guarantees a right against fully-automated decisions, though compliance is inconsistent.</span><span class="intel-tag policy">Policy</span></div>
+    <div class="intel-item"><span class="intel-amount"></span><span class="intel-desc"><strong>Regional tech summit outcomes</strong> — sovereignty pillars named across data, cloud, operations and AI; large-scale fiber and technical-talent programs cited as the underlying infrastructure push.</span><span class="intel-tag policy">Policy</span></div>
+  </div>
+</div>
+
+<!-- PIPELINE (illustrative sample data) -->
+<div class="section" id="pipeline">
+  <p class="section-intro">Illustrative sample — the live version reconciles a persistent memory store of real ongoing projects against what's changed since the last run, and surfaces only what's genuinely time-sensitive today.</p>
+
+  <div class="action-banner">
+    <strong>Today's action items (sample):</strong>
+    <ol>
+      <li>Follow up on an application where materials are complete but submission isn't confirmed, against a hard deadline.</li>
+      <li>Check in on a pending reply from an external partner, sent two days ago.</li>
+      <li>Close out the last open item on a technical build — documentation, not code.</li>
+      <li>Continue an outreach thread that needs a scheduled nudge, plus a related public post to keep momentum.</li>
+      <li>Prepare for an upcoming client demo — lead with the capability the client is actually drawn to, not the one that's technically more impressive.</li>
+    </ol>
+  </div>
+
+  <div class="pipeline-table-wrap">
+    <table class="pipeline-table">
+      <thead><tr><th>Project</th><th>Status</th><th>Next Action</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>Job Search</td><td><span class="status-pill status-active">Active</span></td><td>Application materials complete for the current target — confirm submission, then move to the next opportunity. Hard deadline this quarter.</td><td><span class="priority-dot priority-high"></span>High</td></tr>
+        <tr><td>RAG Knowledge Base Build</td><td><span class="status-pill status-active">Active</span></td><td>Evaluation work (golden dataset, regression suite, drift/CI gates, tracing) complete. Remaining: front-end build and final documentation.</td><td><span class="priority-dot priority-high"></span>High</td></tr>
+        <tr><td>Eval-Project Portfolio</td><td><span class="status-pill status-active">Active</span></td><td>Three of four planned projects named and live. Scoping the fourth.</td><td><span class="priority-dot priority-high"></span>High</td></tr>
+        <tr><td>Enterprise AI Pitch (Client A)</td><td><span class="status-pill status-waiting">Pending demo</span></td><td>Live demo scheduled; lead with the workflow-automation angle over the knowledge-base angle, based on the client's own stated preference.</td><td><span class="priority-dot priority-high"></span>High</td></tr>
+        <tr><td>External Consultancy Engagement</td><td><span class="status-pill status-waiting">Awaiting reply</span></td><td>Clarifying questions on scope, payment timing, and IP ownership sent — awaiting response.</td><td><span class="priority-dot priority-high"></span>High</td></tr>
+        <tr><td>Content System (LinkedIn/Short-form)</td><td><span class="status-pill status-active">Active</span></td><td>Ongoing series in progress; consistent posting cadence maintained.</td><td><span class="priority-dot priority-medium"></span>Med</td></tr>
+        <tr><td>Invoice-Reconciliation Eval</td><td><span class="status-pill status-complete">Complete</span></td><td>Shelved at logic-layer scope after a third-party API integration blocker. Lesson carried into the next build's requirements.</td><td><span class="priority-dot priority-low"></span>Low</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(function() {
+  const tabs = document.querySelectorAll('.tab');
+  const sections = document.querySelectorAll('.section');
+  function activate(tabName) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+    sections.forEach(s => s.classList.toggle('active', s.id === tabName));
+  }
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+})();
+</script>
+</body></html>
