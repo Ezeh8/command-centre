@@ -1,5 +1,4 @@
-Command Centre
-Autonomous Daily Briefing & Research Engine
+COMMAND CENTRE (Autonomous Daily Briefing & Research Engine)
 
 Sets up an unattended, daily-scheduled agent that rebuilds and republishes an 
 always-current HTML/CSS/JS dashboard in place, using live web research and a 
